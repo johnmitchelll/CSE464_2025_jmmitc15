@@ -61,4 +61,69 @@ public class GraphTest {
         assertTrue(dotText.contains("digraph G"));
         assertTrue(dotText.contains("x -> y;"));
     }
+
+    @Test
+    public void testRemoveNodeAndEdges() {
+        Graph g = new Graph();
+        g.addEdge("a", "b");
+        g.addEdge("b", "c");
+        g.addEdge("c", "a"); // triangle
+
+        g.removeNode("b");
+
+        String out = g.toString();
+        assertTrue(out.contains("Number of nodes: 2"));
+        // make sure the remaining nodes are a and c
+        assertTrue(out.contains("Nodes: [a, c]") || out.contains("Nodes: [c, a]"));
+        // make sure edges touching b are gone
+        assertFalse(out.contains("a -> b"));
+        assertFalse(out.contains("b -> c"));
+    }
+
+    @Test
+    public void testRemoveNodesThrowsOnMissing() {
+        Graph g = new Graph();
+        g.addNode("a");
+        g.addNode("b");
+
+        assertThrows(IllegalArgumentException.class, () -> g.removeNode("x"));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> g.removeNodes(new String[]{"a", "x"}));
+    }
+
+    @Test
+    public void testRemoveEdgeAndThrowOnMissing() {
+        Graph g = new Graph();
+        g.addEdge("a", "b");
+
+        g.removeEdge("a", "b");
+        String out = g.toString();
+        assertTrue(out.contains("Number of edges: 0"));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> g.removeEdge("a", "b"));
+
+        assertThrows(IllegalArgumentException.class,
+                () -> g.removeEdge("x", "y"));
+    }
+
+    @Test
+    public void testGraphSearchBfsAndDfs() {
+        Graph g = new Graph();
+        g.addEdge("a", "b");
+        g.addEdge("b", "c");
+        g.addEdge("c", "d");
+
+        Node src = new Node("a");
+        Node dst = new Node("d");
+
+        Path bfsPath = g.GraphSearch(src, dst, Algorithm.BFS);
+        Path dfsPath = g.GraphSearch(src, dst, Algorithm.DFS);
+
+        assertNotNull(bfsPath);
+        assertNotNull(dfsPath);
+        assertEquals("[a, b, c, d]", bfsPath.getNodes().toString());
+        assertEquals("[a, b, c, d]", dfsPath.getNodes().toString());
+    }
 }

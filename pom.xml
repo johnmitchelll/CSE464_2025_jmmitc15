@@ -9,7 +9,7 @@
     <artifactId>CSE464_2025_jmmitc15</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>CSE464_2025_jmmitc15</name>
-    <description>CSE 464 Project Part 1</description>
+    <description>CSE 464 Project Part 2</description>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
