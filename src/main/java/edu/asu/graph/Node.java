@@ -4,17 +4,14 @@ import java.util.Objects;
 
 public class Node {
 
-    private final String label;
+    private final String name;
 
-    public Node(String label) {
-        if (label == null || label.isBlank()) {
-            throw new IllegalArgumentException("Node label cannot be null or blank");
-        }
-        this.label = label.trim();
+    public Node(String name) {
+        this.name = name;
     }
 
-    public String getLabel() {
-        return label;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -22,16 +19,16 @@ public class Node {
         if (this == o) return true;
         if (!(o instanceof Node)) return false;
         Node node = (Node) o;
-        return label.equals(node.label);
+        return Objects.equals(name, node.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(label);
+        return Objects.hash(name);
     }
 
     @Override
     public String toString() {
-        return label;
+        return "Node{" + name + '}';
     }
 }
