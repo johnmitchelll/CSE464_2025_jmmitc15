@@ -23,4 +23,16 @@ public class Graph {
     public Set<Node> getAllNodes() {
         return adjList.keySet();
     }
+
+    public Path graphSearch(Node src, Node dst, Algorithm algo) {
+        SearchStrategy strategy;
+
+        if (algo == Algorithm.BFS) {
+            strategy = new BFSSearchStrategy();
+        } else {
+            strategy = new DFSSearchStrategy();
+        }
+
+        return strategy.search(this, src, dst);
+    }
 }
