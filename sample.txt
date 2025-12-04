@@ -1,0 +1,21 @@
+Number of nodes: 7
+Nodes: [a, b, c, d, e, g, h]
+Number of edges: 8
+Edges:
+a -> b
+a -> e
+b -> c
+b -> d
+c -> a
+e -> g
+g -> h
+h -> b
+
+BFS Search:
+Path{nodes=[Node{a}, Node{b}, Node{c}]}
+
+DFS Search:
+Path{nodes=[Node{a}, Node{e}, Node{g}, Node{h}, Node{b}, Node{c}]}
+
+Random Walk Search:
+Path{nodes=[Node{a}, Node{b}, Node{c}]}

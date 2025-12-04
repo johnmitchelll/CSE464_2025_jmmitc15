@@ -1,49 +1,39 @@
 package edu.asu.graph;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.*;
 
 public class GraphParser {
 
-    public static Graph parseGraph(String filepath) throws IOException {
-        Graph g = new Graph();
+    public static Graph parseDotFile(String filePath) throws IOException {
+        Graph graph = new Graph();
+        Map<String, Node> nodeCache = new HashMap<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                line = line.trim();
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
+        String line;
 
-                if (line.isEmpty()) continue;
-                if (line.startsWith("//")) continue;
-                if (line.startsWith("#")) continue;
-                if (line.startsWith("digraph")) continue;
-                if (line.startsWith("graph")) continue;
-                if (line.startsWith("{")) continue;
-                if (line.startsWith("}")) continue;
+        while ((line = reader.readLine()) != null) {
+            line = line.trim();
 
-                if (line.endsWith(";")) {
-                    line = line.substring(0, line.length() - 1).trim();
-                }
+            if (line.contains("->")) {
+                String[] parts = line.replace(";", "").split("->");
+                String fromLabel = parts[0].trim();
+                String toLabel = parts[1].trim();
 
-                if (line.contains("->")) {
-                    String[] parts = line.split("->");
-                    if (parts.length == 2) {
-                        String src = parts[0].trim();
-                        String dst = parts[1].trim();
-                        if (!src.isEmpty() && !dst.isEmpty()) {
-                            g.addEdge(src, dst);
-                        }
-                    }
-                } else {
-                    String nodeLabel = line.trim();
-                    if (!nodeLabel.isEmpty()) {
-                        g.addNode(nodeLabel);
-                    }
-                }
+                Node from = nodeCache.computeIfAbsent(fromLabel, Node::new);
+                Node to = nodeCache.computeIfAbsent(toLabel, Node::new);
+
+                graph.addNode(from);
+                graph.addNode(to);
+                graph.addEdge(from, to);
+            } else if (line.endsWith(";") && !line.contains("digraph")) {
+                String label = line.replace(";", "").trim();
+                Node node = nodeCache.computeIfAbsent(label, Node::new);
+                graph.addNode(node);
             }
         }
 
-        return g;
+        reader.close();
+        return graph;
     }
 }

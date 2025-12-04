@@ -1,26 +1,34 @@
 package edu.asu.graph;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Path {
 
-    private final List<String> nodes;
+    private final List<Node> nodes;
 
-    public Path(List<String> nodes) {
-        if (nodes == null || nodes.isEmpty()) {
-            throw new IllegalArgumentException("Path cannot be empty");
-        }
-        this.nodes = new ArrayList<>(nodes);
+    public Path(Node startNode) {
+        this.nodes = new ArrayList<>();
+        nodes.add(startNode);
     }
 
-    public List<String> getNodes() {
-        return Collections.unmodifiableList(nodes);
+    public Path(Path existingPath) {
+        this.nodes = new ArrayList<>(existingPath.nodes);
+    }
+
+    public void add(Node node) {
+        nodes.add(node);
+    }
+
+    public Node getLastNode() {
+        return nodes.get(nodes.size() - 1);
+    }
+
+    public List<Node> getNodes() {
+        return nodes;
     }
 
     @Override
     public String toString() {
-        return String.join(" -> ", nodes);
+        return "Path{nodes=" + nodes + '}';
     }
 }

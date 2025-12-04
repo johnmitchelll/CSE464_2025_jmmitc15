@@ -1,33 +1,53 @@
 package edu.asu.graph;
 
+import java.util.*;
+
 public class Main {
 
-    // args:
-    // [0] input DOT file path
-    // [1] output text summary file path
-    // [2] output PNG file path
     public static void main(String[] args) {
-        if (args.length < 3) {
-            System.out.println("Usage: java Main <input.dot> <out.txt> <out.png>");
-            return;
-        }
-
-        String dotIn = args[0];
-        String summaryOut = args[1];
-        String pngOut = args[2];
-
         try {
-            Graph g = GraphParser.parseGraph(dotIn);
+            Graph g = GraphParser.parseDotFile("sample.dot");
 
-            System.out.println("Parsed graph:");
-            System.out.println(g.toString());
+            Set<Node> nodes = g.getAllNodes();
+            int edgeCount = 0;
 
-            g.outputGraph(summaryOut);
+            for (Node n : nodes) {
+                edgeCount += g.getNeighbors(n).size();
+            }
 
-            GraphExporter.outputGraphics(g, pngOut, "png");
+            System.out.println("Number of nodes: " + nodes.size());
 
-            System.out.println("Wrote summary to " + summaryOut);
-            System.out.println("Wrote PNG to " + pngOut);
+            List<String> names = new ArrayList<>();
+            for (Node n : nodes) {
+                names.add(n.getName());
+            }
+            Collections.sort(names);
+            System.out.println("Nodes: " + names);
+
+            System.out.println("Number of edges: " + edgeCount);
+            System.out.println("Edges:");
+
+            for (Node n : nodes) {
+                for (Node neighbor : g.getNeighbors(n)) {
+                    System.out.println(n.getName() + " -> " + neighbor.getName());
+                }
+            }
+
+            Node src = new Node("a");
+            Node dst = new Node("c");
+
+            System.out.println();
+            System.out.println("BFS Search:");
+            System.out.println(g.graphSearch(src, dst, Algorithm.BFS));
+
+            System.out.println();
+            System.out.println("DFS Search:");
+            System.out.println(g.graphSearch(src, dst, Algorithm.DFS));
+
+            System.out.println();
+            System.out.println("Random Walk Search:");
+            System.out.println(g.graphSearch(src, dst, Algorithm.RANDOM));
+
         } catch (Exception e) {
             e.printStackTrace();
         }
