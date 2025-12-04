@@ -37,16 +37,20 @@ public class Main {
             Node dst = new Node("c");
 
             System.out.println();
-            System.out.println("BFS Search:");
+            System.out.println("BFS Final Path:");
             System.out.println(g.graphSearch(src, dst, Algorithm.BFS));
 
             System.out.println();
-            System.out.println("DFS Search:");
+            System.out.println("DFS Final Path:");
             System.out.println(g.graphSearch(src, dst, Algorithm.DFS));
 
             System.out.println();
-            System.out.println("Random Walk Search:");
-            System.out.println(g.graphSearch(src, dst, Algorithm.RANDOM));
+            System.out.println("Random Walk Attempts:");
+
+            for (int i = 1; i <= 5; i++) {
+                Path randomPath = g.graphSearch(src, dst, Algorithm.RANDOM);
+                System.out.println("Attempt " + i + ": " + randomPath);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

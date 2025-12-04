@@ -1,21 +1,29 @@
-Number of nodes: 7
-Nodes: [a, b, c, d, e, g, h]
-Number of edges: 8
+Number of nodes: 10
+Nodes: [a, b, c, d, e, f, g, h, k, z]
+Number of edges: 12
 Edges:
 a -> b
-a -> e
+a -> f
 b -> c
 b -> d
+c -> e
 c -> a
-e -> g
+d -> k
+e -> z
+f -> g
 g -> h
 h -> b
+k -> f
 
-BFS Search:
+BFS Final Path:
 Path{nodes=[Node{a}, Node{b}, Node{c}]}
 
-DFS Search:
-Path{nodes=[Node{a}, Node{e}, Node{g}, Node{h}, Node{b}, Node{c}]}
+DFS Final Path:
+Path{nodes=[Node{a}, Node{f}, Node{g}, Node{h}, Node{b}, Node{c}]}
 
-Random Walk Search:
-Path{nodes=[Node{a}, Node{b}, Node{c}]}
+Random Walk Attempts:
+Attempt 1: Path{nodes=[Node{a}, Node{b}, Node{d}, Node{k}, Node{f}, Node{g}, Node{h}, Node{b}, Node{d}, Node{k}, Node{f}, Node{g}, Node{h}, Node{b}, Node{c}]}
+Attempt 2: Path{nodes=[Node{a}, Node{f}, Node{g}, Node{h}, Node{b}, Node{c}]}
+Attempt 3: Path{nodes=[Node{a}, Node{f}, Node{g}, Node{h}, Node{b}, Node{c}]}
+Attempt 4: Path{nodes=[Node{a}, Node{f}, Node{g}, Node{h}, Node{b}, Node{c}]}
+Attempt 5: Path{nodes=[Node{a}, Node{f}, Node{g}, Node{h}, Node{b}, Node{d}, Node{k}, Node{f}, Node{g}, Node{h}, Node{b}, Node{c}]}
