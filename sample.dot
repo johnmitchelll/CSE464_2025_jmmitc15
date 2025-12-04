@@ -1,10 +1,20 @@
 digraph G {
     a -> b;
-    a -> e;
+    a -> f;
+
     b -> c;
     b -> d;
+
+    c -> e;
     c -> a;
-    e -> g;
+
+    d -> k;
+
+    e -> z;
+
+    f -> g;
     g -> h;
     h -> b;
+
+    k -> f;
 }
