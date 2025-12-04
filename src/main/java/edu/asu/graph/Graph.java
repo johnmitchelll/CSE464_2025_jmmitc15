@@ -29,8 +29,10 @@ public class Graph {
 
         if (algo == Algorithm.BFS) {
             strategy = new BFSSearchStrategy();
-        } else {
+        } else if (algo == Algorithm.DFS) {
             strategy = new DFSSearchStrategy();
+        } else {
+            strategy = new RandomWalkSearchStrategy();
         }
 
         return strategy.search(this, src, dst);
