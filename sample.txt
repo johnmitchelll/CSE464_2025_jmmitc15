@@ -26,4 +26,4 @@ Attempt 1: Path{nodes=[Node{a}, Node{b}, Node{d}, Node{k}, Node{f}, Node{g}, Nod
 Attempt 2: Path{nodes=[Node{a}, Node{f}, Node{g}, Node{h}, Node{b}, Node{c}]}
 Attempt 3: Path{nodes=[Node{a}, Node{f}, Node{g}, Node{h}, Node{b}, Node{c}]}
 Attempt 4: Path{nodes=[Node{a}, Node{f}, Node{g}, Node{h}, Node{b}, Node{c}]}
-Attempt 5: Path{nodes=[Node{a}, Node{f}, Node{g}, Node{h}, Node{b}, Node{d}, Node{k}, Node{f}, Node{g}, Node{h}, Node{b}, Node{c}]}
+Attempt 5: Path{nodes=[Node{a}, Node{f}, Node{g}, Node{h}, Node{b}, Node{c}]}
