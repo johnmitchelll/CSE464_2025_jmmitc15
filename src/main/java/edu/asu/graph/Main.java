@@ -34,7 +34,7 @@ public class Main {
             }
 
             Node src = new Node("a");
-            Node dst = new Node("c");
+            Node dst = new Node("h");
 
             System.out.println();
             System.out.println("BFS Final Path:");
